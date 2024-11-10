@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <title>License Management</title>
+</head>
+<body>
+    <div id="content-container">
+        <div id="content" class="nunito">
+            {% block content %}
+            {% endblock %}
+            <br>
+            <div class="footer">
+                <a href="/">Home</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="blob-outer-container">
+        <div class="blob-inner-container">
+            <div class="blob"></div>
+            <div id="interactive-blob"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const blobOuterContainer = document.querySelector('.blob-outer-container');
+        blobOuterContainer.style.opacity = 0;
+        setTimeout(() => {
+            blobOuterContainer.style.transition = 'opacity 0.5s';
+            blobOuterContainer.style.opacity = 0.45;
+        }, 50);
+
+        blob = document.getElementById("interactive-blob");
+        let curX = 0;
+        let curY = 0;
+        let tgX = 0;
+        let tgY = 0;
+
+        function move() {
+            curX += (tgX - curX) / 7;
+            curY += (tgY - curY) / 7;
+            blob.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+            requestAnimationFrame(() => {
+                move();
+            });
+        }
+        window.addEventListener('mousemove', (event) => {
+            tgX = event.clientX - 100;
+            tgY = event.clientY - 100;
+        });
+        move();
+    });
+</script>
+<style>
+    .nunito {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    a {
+        color: rgb(220, 220, 220);
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #content-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #content {
+        background-color: rgb(0, 0, 0, 0.3);
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    .blob-outer-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+        filter: blur(150px);
+    }
+
+    .blob-inner-container {
+        position: absolute;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .blob {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        inset: 0;
+        margin: auto;
+        background: conic-gradient(from 0deg, #092635, #1B4242, #5C8374, #9EC8B9, #5C8374, #1B4242, #092635);
+        animation: spinBlob 10s linear infinite;
+    }
+
+    #interactive-blob {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        background-color: #E2F1E7;
+        opacity: 0.5;
+    }
+
+    @keyframes spinBlob {
+        0% {
+            transform: rotate(0deg) scale(2);
+        }
+        100% {
+            transform: rotate(1turn) scale(2);
+        }
+    }
+</style>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ application }}</h1>
+    {% for key, license_details in licenses.items() %}
+        <br>
+        <h2>Licensee: {{ license_details.licensee }}</h2>
+        <h3><a href="/admin/{{ application }}/licenses/{{ key }}">Manage</a></h3>
+    {% endfor %}
+{% endblock %}

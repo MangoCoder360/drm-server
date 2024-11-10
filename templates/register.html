@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <div id="login-container" class="nunito">
+        <h1><strong>Create an account to view your licenses</strong></h1>
+        <form action="register" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+
+    <div class="blob-outer-container">
+        <div class="blob-inner-container">
+            <div class="blob"></div>
+            <div id="interactive-blob"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginContainer = document.getElementById('login-container');
+        const blobOuterContainer = document.querySelector('.blob-outer-container');
+        loginContainer.style.opacity = 0;
+        blobOuterContainer.style.opacity = 0;
+        setTimeout(() => {
+            loginContainer.style.transition = 'opacity 4s';
+            loginContainer.style.opacity = 1;
+
+            blobOuterContainer.style.transition = 'opacity 8s';
+            blobOuterContainer.style.opacity = 0.7;
+        }, 500);
+
+        blob = document.getElementById("interactive-blob");
+        let curX = 0;
+        let curY = 0;
+        let tgX = 0;
+        let tgY = 0;
+
+        function move() {
+            curX += (tgX - curX) / 7;
+            curY += (tgY - curY) / 7;
+            blob.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+            requestAnimationFrame(() => {
+                move();
+            });
+        }
+        window.addEventListener('mousemove', (event) => {
+            tgX = event.clientX - 100;
+            tgY = event.clientY - 100;
+        });
+        move();
+    });
+</script>
+<style>
+    .nunito {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    a {
+        color: rgb(220, 220, 220);
+    }
+
+    #login-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #login-container h1 {
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    #login-container form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+    }
+
+    #login-container input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #login-container button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #login-container button:hover {
+        background-color: #0056b3;
+    }
+
+    #login-container select {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .blob-outer-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+        filter: blur(100px);
+    }
+
+    .blob-inner-container {
+        position: absolute;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-color: gray;
+    }
+
+    .blob {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        inset: 0;
+        margin: auto;
+        background: conic-gradient(from 0deg, #092635, #1B4242, #5C8374, #9EC8B9, #5C8374, #1B4242, #092635);
+        animation: spinBlob 8s linear infinite;
+    }
+
+    #interactive-blob {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        background-color: #E2F1E7;
+    }
+
+    @keyframes spinBlob {
+        0% {
+            transform: rotate(0deg) scale(2);
+        }
+        100% {
+            transform: rotate(1turn) scale(2);
+        }
+    }
+</style>

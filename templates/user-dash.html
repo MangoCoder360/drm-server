@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>My Licenses:</h1>
+    {% for key, license_details in licenses.items() %}
+        <h2>{{ license_details.application }}</h2>
+        <h3>Key: {{ key }}</h3>
+        <p>Licensee: {{ license_details.licensee }}</p>
+        <p>Status: {{ license_details.status }}</p>
+    {% endfor %}
+{% endblock %}
