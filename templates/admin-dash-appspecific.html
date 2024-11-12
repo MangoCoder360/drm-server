@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ application }}</h1>
+    <h1>{{ application }} (v{{ current_version }})</h1>
+    <h2><a href="/admin/{{ application }}/publishing">Publish OTA Update</a></h2>
     {% for key, license_details in licenses.items() %}
         <br>
         <h2>Licensee: {{ license_details.licensee }}</h2>

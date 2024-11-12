@@ -1,4 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Manage License</h1>
+    <h2>{{ license.application }}</h2>
+    <h3>License Key: {{ key }}</h3>
+    <p>Licensee: {{ license.licensee }}</p>
+    <p>Status: {{ license.status }}</p>
+    <p>Build Number: {{ buildNumber }}</p>
+    <p>Seconds Since Last Check-In: {{ secondsSinceLastConfigFetch }}</p>
 {% endblock %}

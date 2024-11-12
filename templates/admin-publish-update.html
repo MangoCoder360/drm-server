@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Create a new release</h1>
+    <h2>{{ application }}</h2>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="version">Version</label>
+            <input required type="text" class="form-control" id="version" name="version" placeholder="{{ current_version }}">
+        </div><br>
+        <div class="form-group">
+            <label for="file">Source File (.py)</label>
+            <input required type="file" class="form-control-file" id="file" name="file">
+        </div><br>
+        <button type="submit" class="btn btn-primary">Publish & Deploy</button><br><br>
+        <i>The source file you upload will automatically be minified<br>before being distributed to clients.</i>
+    </form>
+{% endblock %}

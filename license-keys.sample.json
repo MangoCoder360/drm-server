@@ -1,0 +1,10 @@
+{
+    "sample-application": {
+        "AAAA-BBBB-CCCC-DDDD": {
+            "licensee": "SAMPLE",
+            "status": "valid",
+            "minVersion": 1,
+            "dashboardOwner": "SAMPLE"
+        }
+    }
+}

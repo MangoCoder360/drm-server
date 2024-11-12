@@ -1,0 +1,15 @@
+{
+    "sample-application": {
+        "latestVersion": "0.0.0.",
+        "url": "/ota/sample-application/0-0-0/main.py",
+        "clientConfigs": {
+            "AAAA-BBBB-CCCC-DDDD": {
+                "otaUpdatesEnabled": true,
+                "lastConfigFetchTime": 0,
+                "killswitch": false,
+                "currentVersion": "1.0.0",
+                "buildNumber": "0"
+            }
+        }
+    }
+}
