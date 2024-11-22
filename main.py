@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, render_template, session, send_file, abort
 from functools import wraps
-import random, string, json, time, subprocess
+import random, string, json, time
 
 app = Flask(__name__)
 app.secret_key = str(random.randint(0, 1000000000))
@@ -220,7 +220,6 @@ def admin_publishing(application):
         file = request.files["file"]
         filepath = "ota/" + application + "-" + version.replace(".","-") + "-" + file.filename
         file.save(filepath)
-        subprocess.run(["pyminify", filepath, "--in-place"])
         update_ota_app_config(application, "latestVersion", version)
         update_ota_app_config(application, "url", "/ota/" + application + "/" + version.replace(".","-") + "/" + file.filename)
         return redirect("/admin/" + application)

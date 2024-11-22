@@ -9,10 +9,9 @@
             <input required type="text" class="form-control" id="version" name="version" placeholder="{{ current_version }}">
         </div><br>
         <div class="form-group">
-            <label for="file">Source File (.py)</label>
+            <label for="file">Update File (.zip)</label>
             <input required type="file" class="form-control-file" id="file" name="file">
         </div><br>
         <button type="submit" class="btn btn-primary">Publish & Deploy</button><br><br>
-        <i>The source file you upload will automatically be minified<br>before being distributed to clients.</i>
     </form>
 {% endblock %}
