@@ -134,6 +134,18 @@ def ota_client_config(application):
     else:
         return "403 Forbidden", 403
 
+@app.route("/api/applications/<string:application>/ota/client-config/push/<string:target_param>")
+def ota_client_config_push(application, target_param):
+    license_key = request.args.get("key")
+    value = request.args.get("value")
+    if not value or not license_key:
+        return "400 Bad Request", 400
+    try:
+        update_ota_client_config(application, license_key, target_param, value)
+        return {"status": "success"}
+    except:
+        return "500 Internal Server Error", 500
+
 @app.route("/ota/<string:application>/<string:version>/<string:filename>")
 def ota_download(application, version, filename):
     license_key = request.args.get("key")
